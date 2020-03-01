@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Link, NavLink } from 'react-router-dom';
 import styles from './app.module.css';
 import MasterDetailExample from './master-detail-example';
+import Directory from './directory';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
             <NavLink to="/page1" activeClassName={styles.activeLink}>Page One</NavLink>
             <NavLink to="/page2" activeClassName={styles.activeLink}>Page Two</NavLink>
             <NavLink to="/master-detail" activeClassName={styles.activeLink}>Master-Detail Example</NavLink>
+            <NavLink to="/staff-directory" activeClassName={styles.activeLink}>Directory (Ex 01)</NavLink>
           </nav>
         </header>
 
@@ -28,6 +30,9 @@ function App() {
             </Route>
             <Route path="/master-detail">
               <MasterDetailExample />
+            </Route>
+            <Route path="/staff-directory">
+              <Directory />
             </Route>
             <Route path="*">
               <p>404 Not Found!!</p>

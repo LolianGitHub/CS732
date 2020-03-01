@@ -1,5 +1,4 @@
-import React from 'react';
-import styles from './staff-details.module.css';
+import styles from '../css/staff-details.module.css';
 
 export default function StaffDetails(props) {
 

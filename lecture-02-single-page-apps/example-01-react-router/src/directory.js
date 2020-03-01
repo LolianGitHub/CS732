@@ -1,7 +1,9 @@
 import React from 'react';
 import styles from './master-detail.module.css';
+import StaffDetails from './staff-details';
+import { NavLink, useRouteMatch, Switch, Route, useParams } from 'react-router-dom';
 
-class Directory extends React.Component {
+export default class Directory extends React.Component {
 
     constructor(props) {
         super(props);
@@ -25,10 +27,10 @@ class Directory extends React.Component {
         return (
             <div className={styles.container}>
                 <aside>
-
+                    <NavLink to={`lol`} activeClassName={styles.activeLink}>Someone's Name</NavLink>
                 </aside>
                 <main>
-
+                    <StaffDetails staffMember={this.state.staff[0]} />
                 </main>
             </div>
         );
