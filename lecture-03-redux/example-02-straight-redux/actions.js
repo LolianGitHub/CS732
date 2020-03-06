@@ -1,16 +1,4 @@
-/**
- * This file contains methods which return redux actions.
- */
-
-export const ADD_TODO = "ADD_TODO";
-export const TOGGLE_TODO = "TOGGLE_TODO";
-export const SET_VISIBILITY_FILTER = "SET_VISIBILITY_FILTER";
-
-export const VisibilityFilters = {
-    SHOW_ALL: "SHOW_ALL",
-    SHOW_COMPLETE: "SHOW_COMPLETE",
-    SHOW_INCOMPLETE: "SHOW_INCOMPLETE"
-}
+import { ADD_TODO, SET_TODO_COMPLETE, ADD_EVENT } from './action-types';
 
 export function addTodo(text) {
     return {
@@ -19,16 +7,17 @@ export function addTodo(text) {
     }
 }
 
-export function toggleTodo(index) {
+export function setTodoComplete(index, completed) {
     return {
-        type: TOGGLE_TODO,
-        index
+        type: SET_TODO_COMPLETE,
+        index,
+        completed
     }
 }
 
-export function setVisibilityFilter(filter) {
+export function addEvent(event) {
     return {
-        type: SET_VISIBILITY_FILTER,
-        filter
+        type: ADD_EVENT,
+        event
     }
 }

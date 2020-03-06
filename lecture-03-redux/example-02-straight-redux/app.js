@@ -1,5 +1,6 @@
 import rootReducer from './reducers-manual';
-import { addTodo, toggleTodo } from './actions';
+// import rootReducer from './reducers';
+import { addTodo, setTodoComplete } from './actions';
 import { createStore } from 'redux';
 import readline from 'readline-sync';
 
@@ -39,7 +40,11 @@ while (true) {
             break;
 
         case "toggle":
-            store.dispatch(toggleTodo(parseInt(data)));
+            const i = parseInt(data);
+            const todo = store.getState().todos[i];
+            if (todo) {
+                store.dispatch(setTodoComplete(i, !todo.completed));
+            }
             break;
 
         case "get":
