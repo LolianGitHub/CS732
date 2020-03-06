@@ -1,8 +1,22 @@
 import { createStore } from 'redux';
 import rootReducer from './reducers';
 import { addTodo, setTodoComplete, addEvent } from './actions';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
-const store = createStore(rootReducer);
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
+
+// Config for redux-persist
+const persistConfig = {
+    key: "root",
+    storage: storage,
+    stateReconciler: autoMergeLevel2
+};
+const pReducer = persistReducer(persistConfig, rootReducer);
+
+// export const store = createStore(rootReducer);
+export const store = createStore(pReducer, composeWithDevTools());
 
 // Some dummy data...
 store.dispatch(addTodo("Do stuff"));
@@ -39,4 +53,5 @@ store.dispatch(addEvent({
     description: "APIs and Exercises"
 }));
 
-export default store;
+// Enable persistence of the store
+export const persistor = persistStore(store);
