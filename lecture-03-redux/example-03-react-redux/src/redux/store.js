@@ -1,8 +1,10 @@
 import { createStore } from 'redux';
 import rootReducer from './reducers';
 import { addTodo, setTodoComplete, addEvent } from './actions';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
-const store = createStore(rootReducer);
+// const store = createStore(rootReducer);
+const store = createStore(rootReducer, composeWithDevTools());
 
 // Some dummy data...
 store.dispatch(addTodo("Do stuff"));
