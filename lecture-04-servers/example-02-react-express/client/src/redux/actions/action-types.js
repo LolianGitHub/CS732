@@ -1,4 +1,8 @@
-export const ADD_TODO = "ADD_TODO";
+// export const ADD_TODO = "ADD_TODO";
+export const ADD_TODO_LOADING = "ADD_TODO_LOADING";
+export const ADD_TODO_SUCCESS = "ADD_TODO_SUCCESS";
+export const ADD_TODO_ERROR = "ADD_TODO_ERROR";
+
 export const SET_TODO_COMPLETE = "SET_TODO_COMPLETE";
 export const LOAD_TODOS_LOADING = "LOAD_TODOS_LOADING";
 export const LOAD_TODOS_SUCCESS = "LOAD_TODOS_SUCCESS";

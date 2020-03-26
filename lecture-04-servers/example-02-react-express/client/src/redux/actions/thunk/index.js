@@ -1,5 +1,38 @@
-import { loadTodosLoading, loadTodosSuccess, loadTodosError, loadEventsLoading, loadEventsSuccess, loadEventsError } from '..';
+import { addTodoLoading, addTodoSuccess, addTodoError, loadTodosLoading, loadTodosSuccess, loadTodosError, loadEventsLoading, loadEventsSuccess, loadEventsError } from '..';
 import Api from '../../../api';
+import moment from 'moment';
+import { v4 as uuid } from 'uuid';
+
+export function addTodo(text) {
+    return dispatch => {
+
+        const todo = {
+            id: uuid(),
+            text,
+            completed: false,
+            modified: moment().format()
+        };
+
+        dispatch(addTodoLoading(todo));
+
+        Api.addTodo(todo)
+            .then(
+
+                response => {
+                    if (response.status === 200) {
+                        dispatch(addTodoSuccess(todo));
+                    }
+                    else {
+                        dispatch(addTodoError(todo, "Incorrect status received"));
+                    }
+                },
+
+                error => dispatch(addTodoError(todo, error.message ? error.message : "Unknown error"))
+
+            );
+
+    }
+}
 
 export function loadTodos() {
     return dispatch => {

@@ -1,4 +1,4 @@
-import { ADD_TODO, SET_TODO_COMPLETE, LOAD_TODOS_LOADING, LOAD_TODOS_SUCCESS, LOAD_TODOS_ERROR } from '../actions/action-types';
+import { ADD_TODO_LOADING, ADD_TODO_ERROR, SET_TODO_COMPLETE, LOAD_TODOS_LOADING, LOAD_TODOS_SUCCESS, LOAD_TODOS_ERROR } from '../actions/action-types';
 import moment from 'moment';
 import { v4 as uuid } from 'uuid';
 
@@ -13,8 +13,14 @@ export default function todos(state = [], action) {
     // Perform different things based on the type of action
     switch (action.type) {
 
-        case ADD_TODO:
-            return todos_AddTodo(state, action);
+        // case ADD_TODO:
+        //     return todos_AddTodo(state, action);
+
+        case ADD_TODO_LOADING:
+            return todos_AddTodoLoading(state, action);
+
+        case ADD_TODO_ERROR:
+            return todos_AddTodoError(state, action);
 
         case SET_TODO_COMPLETE:
             return todos_SetTodoComplete(state, action);
@@ -37,16 +43,20 @@ export default function todos(state = [], action) {
  * To add a new todo, return a new array with the contents of the old array plus a new todo with
  * its `text` set to the given text, and its `completed` status set to `false`.
  */
-function todos_AddTodo(state, action) {
+function todos_AddTodoLoading(state, action) {
     return [
         ...state,
-        {
-            id: uuid(),
-            text: action.text,
-            completed: false,
-            modified: moment().format()
-        }
+        action.todo
     ];
+}
+
+function todos_AddTodoError(state, action) {
+    const newState = [...state];
+
+    const index = newState.indexOf(action.todo);
+    newState.splice(index, 1);
+
+    return newState;
 }
 
 /**

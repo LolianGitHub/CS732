@@ -4,7 +4,8 @@ import Card from './layout-components/card';
 import Dialog from './layout-components/dialog'
 import ToDoList from './components/to-do-list';
 import { connect } from 'react-redux';
-import { addTodo, setTodoComplete } from './redux/actions';
+import { setTodoComplete } from './redux/actions';
+import { addTodo } from './redux/actions/thunk';
 import { Switch, Route, withRouter } from 'react-router-dom';
 import styles from './to-do-page.module.css';
 
