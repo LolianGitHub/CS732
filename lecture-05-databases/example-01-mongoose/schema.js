@@ -11,7 +11,7 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
 
-    username: { type: String, unique: true }, // Each user must have a unique username
+    username: { type: String, unique: true, required: true }, // Each user must have a unique username
     firstName: String,  // Basic fields
     lastName: String,
     gender: String,
@@ -46,15 +46,15 @@ userSchema.virtual('fullName')
 export const User = mongoose.model('User', userSchema);
 
 const petSchema = new Schema({
-    number: { type: String, unique: true },
-    name: String,
-    species: String,
-    breed: String,
+    number: { type: String, unique: true, required: true },
+    name: { type: String, required: true },
+    species: { type: String, required: true },
+    breed: { type: String, required: true },
     initialRegistrationDate: Date,
     expiryDate: Date,
     isNeutered: Boolean,
     notes: [{ date: Date, content: String }],
-    owner: { type: Schema.Types.ObjectId, ref: 'User' }
+    owner: { type: Schema.Types.ObjectId, ref: 'User', required: true }
 }, {
     timestamps: {}
 });
