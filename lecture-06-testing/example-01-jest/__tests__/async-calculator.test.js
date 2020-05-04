@@ -12,9 +12,9 @@ import { sum, difference, asyncFailsauce } from '../async-calculator';
  * This won't work either - the test will complete as soon as the test function returns - by which point, the expect() may not
  * have been called because it won't be called until the async sum() operation has completed.
  */
-it('adds 1 + 2 = 3', () => {
-    sum(1, 2).then(result => expect(result).toBe(3));
-})
+// it('adds 1 + 2 = 3', () => {
+//     sum(1, 2).then(result => expect(result).toBe(3));
+// })
 
 /** We can test aync code using async / await ourselves */
 
