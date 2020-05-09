@@ -17,7 +17,8 @@ import {
 } from './component-demos';
 import {
   BorderPaddingDemo,
-  FlexDemo
+  FlexDemo,
+  FlexProportionDemo
 } from './layout-demos';
 import FlexDemoWithRedux from './flex-demo-with-redux';
 import OriginalPage from './comes-with-new-rn-app';
@@ -43,6 +44,7 @@ function App() {
             <SafeAreaView style={{ flex: 1 }}>
               <Stack.Navigator>
                 <Stack.Screen
+                  key={-1}
                   name="Home"
                   component={Home}
                   options={{ title: 'React Native Demos' }}
@@ -50,7 +52,7 @@ function App() {
 
                 {demos.map((demo, index) => (
                   <Stack.Screen
-                    key={-1}
+                    key={index}
                     name={demo.name}
                     component={demo.component}
                     options={{ title: demo.title }}
@@ -73,13 +75,10 @@ const demos = [
   { title: '<ScrollView>', name: 'ScrollView', component: ScrollViewDemo },
   { title: '<FlatList>', name: 'FlatList', component: FlatListDemo },
   { title: 'Borders & Padding', name: 'BP', component: BorderPaddingDemo },
+  { title: 'Flex proportions', name: 'FlexProportion', component: FlexProportionDemo },
   { title: 'Flex', name: 'Flex', component: FlexDemo },
   { title: 'Flex (with Redux)', name: 'FlexRedux', component: FlexDemoWithRedux }
 ];
-
-function ProfileScreen({ route, navigation }) {
-  return <Text>{route.params.name}</Text>
-}
 
 class Home extends React.Component {
 
