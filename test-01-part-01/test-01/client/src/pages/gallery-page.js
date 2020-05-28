@@ -21,16 +21,22 @@ class GalleryPage extends React.Component {
         this.props.history.push(`/${items._id}`);
     }
 
+    handleFavourite(changes) {
+        this.setState(oldState => ({
+            galleryItems: { ...oldState.galleryItems, favourite: changes}
+        }));
+    }
+
     render() {
         const { galleryItems } = this.props;
 
         return (
             <Switch>
                 <Route exact path="/">
-                    <ImageGallery galleryItems={galleryItems} handleChangeImage={items => this.handleChangeImage(items)} />
+                    <ImageGallery galleryItems={galleryItems} handleChangeImage={items => this.handleChangeImage(items)} handleFavourite={items => this.handleFavourite(items)} />
                 </Route>
                 <Route path="/:id">
-                    <ImageGalleryWithParams galleryItems={galleryItems} />
+                    <ImageGalleryWithParams galleryItems={galleryItems} handleChangeImage={items => this.handleChangeImage(items)} handleFavourite={items => this.handleFavourite(items)} />
                 </Route>    
                 <Route path="*">
                     <Redirect to={`/${galleryItems[0] ? galleryItems[0]._id : ''}`} />
@@ -41,9 +47,9 @@ class GalleryPage extends React.Component {
 }
 
 
-function ImageGalleryWithParams({ galleryItems }) {
+function ImageGalleryWithParams({ galleryItems, handleChangeImage, handleFavourite }) {
     const { id } = useParams();
-    return <ImageGallery galleryItems={galleryItems} selectedId={id} />
+    return <ImageGallery galleryItems={galleryItems} selectedId={id} handleChangeImage={handleChangeImage} handleFavourite={handleFavourite} />
 }
 
 /**

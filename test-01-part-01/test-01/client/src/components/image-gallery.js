@@ -10,7 +10,7 @@ import GalleryThumbnailsList from './gallery-thumbnails-list';
 
 import preloadImages from '../preload-images'; // Get these images into the browser cache
 
-export default function ImageGallery({ galleryItems, selectedId, handleChangeImage }) {
+export default function ImageGallery({ galleryItems, selectedId, handleChangeImage, handleFavourite }) {
 
     const classes = useStyles();
 
@@ -25,6 +25,7 @@ export default function ImageGallery({ galleryItems, selectedId, handleChangeIma
     selectedItem = selectedItem || galleryItems[0];
 
     handleChangeImage = handleChangeImage || (() => null); // Prevent trying to call a nonexistant function
+    handleFavourite = handleFavourite || (() => null); // Prevent trying to call a nonexistant function
 
     return (
         <div className={classes.root}>
@@ -48,7 +49,8 @@ export default function ImageGallery({ galleryItems, selectedId, handleChangeIma
             <GalleryThumbnailsList
                 galleryItems={galleryItems}
                 selectedId={selectedItem._id}
-                onThumbnailClick={item => handleChangeImage(item)} />
+                onThumbnailClick={item => handleChangeImage(item)} 
+                onHandleFavourite={item => handleFavourite(item)} />
         </div>
     );
 }

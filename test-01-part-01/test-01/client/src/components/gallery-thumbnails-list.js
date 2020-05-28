@@ -5,9 +5,10 @@ import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import IconButton from '@material-ui/core/IconButton';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
+import StarIcon from '@material-ui/icons/Star'
 import moment from 'moment';
 
-export default function GalleryThumbnailsList({ galleryItems, selectedId, onThumbnailClick }) {
+export default function GalleryThumbnailsList({ galleryItems, selectedId, onThumbnailClick, onHandleFavourite }) {
     const classes = useStyles();
 
     return (
@@ -21,7 +22,7 @@ export default function GalleryThumbnailsList({ galleryItems, selectedId, onThum
                             subtitle={<span>Taken: {moment(item.created).format('MMM Do, YYYY')}</span>}
                             actionIcon={
                                 <IconButton aria-label={`star ${item.title}`} className={classes.icon}>
-                                    <StarBorderIcon />
+                                    <Favourite favourite={item.favourite} onClick={(e) => {onHandleFavourite(!item.favourite); e.nativeEvent.stopImmediatePropagation(); e.stopPropagation(); e.cancelBuble=true;}} />
                                 </IconButton>
                             }
                         />
@@ -30,6 +31,15 @@ export default function GalleryThumbnailsList({ galleryItems, selectedId, onThum
             </GridList>
         </div>
     );
+}
+
+function Favourite (props) {
+    const isFavourite = props.favourite;
+    if (isFavourite) {
+        return <StarIcon />;
+    }
+    return <StarBorderIcon />;
+
 }
 
 const useStyles = makeStyles((theme) => ({
