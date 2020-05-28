@@ -21,8 +21,8 @@ export default function GalleryThumbnailsList({ galleryItems, selectedId, onThum
                             title={item.title}
                             subtitle={<span>Taken: {moment(item.created).format('MMM Do, YYYY')}</span>}
                             actionIcon={
-                                <IconButton aria-label={`star ${item.title}`} className={classes.icon}>
-                                    <Favourite favourite={item.favourite} onClick={(e) => {onHandleFavourite(!item.favourite); e.nativeEvent.stopImmediatePropagation(); e.stopPropagation(); e.cancelBuble=true;}} />
+                                <IconButton aria-label={`star ${item.title}`} className={classes.icon} onClick={(e) => {onHandleFavourite(item._id, !item.favourite); e.nativeEvent.stopImmediatePropagation(); e.stopPropagation(); e.cancelBuble=true;}}>
+                                    <Favourite favourite={item.favourite} />
                                 </IconButton>
                             }
                         />

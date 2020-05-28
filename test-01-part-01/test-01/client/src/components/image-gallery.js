@@ -50,7 +50,7 @@ export default function ImageGallery({ galleryItems, selectedId, handleChangeIma
                 galleryItems={galleryItems}
                 selectedId={selectedItem._id}
                 onThumbnailClick={item => handleChangeImage(item)} 
-                onHandleFavourite={item => handleFavourite(item)} />
+                onHandleFavourite={(_id, favourite) => handleFavourite(_id, favourite)} />
         </div>
     );
 }

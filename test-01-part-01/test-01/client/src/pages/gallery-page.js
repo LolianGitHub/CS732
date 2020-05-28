@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { connect } from 'react-redux';
-import { listGalleryItemsThunk } from '../redux/actions';
+import { listGalleryItemsThunk, updateGalleryItemThunk } from '../redux/actions';
 import { withRouter, useParams, Switch, Route, Redirect } from 'react-router-dom';
 
 import ImageGallery from '../components/image-gallery';
@@ -21,10 +21,16 @@ class GalleryPage extends React.Component {
         this.props.history.push(`/${items._id}`);
     }
 
-    handleFavourite(changes) {
-        this.setState(oldState => ({
-            galleryItems: { ...oldState.galleryItems, favourite: changes}
-        }));
+    handleFavourite(_id, favourite) {
+        const newList = {};
+        for (const key in this.props.galleryItems) {
+            const item = this.props.galleryItems[key];
+            newList[key] = item;
+            if (item._id === _id) {
+                newList[key].favourite = favourite;
+            }
+        }
+        this.props.dispatchUpdateGalleryItems(newList);
     }
 
     render() {
@@ -33,10 +39,10 @@ class GalleryPage extends React.Component {
         return (
             <Switch>
                 <Route exact path="/">
-                    <ImageGallery galleryItems={galleryItems} handleChangeImage={items => this.handleChangeImage(items)} handleFavourite={items => this.handleFavourite(items)} />
+                    <ImageGallery galleryItems={galleryItems} handleChangeImage={items => this.handleChangeImage(items)} handleFavourite={(_id, favourite)=> this.handleFavourite(_id, favourite)} />
                 </Route>
                 <Route path="/:id">
-                    <ImageGalleryWithParams galleryItems={galleryItems} handleChangeImage={items => this.handleChangeImage(items)} handleFavourite={items => this.handleFavourite(items)} />
+                    <ImageGalleryWithParams galleryItems={galleryItems} handleChangeImage={items => this.handleChangeImage(items)} handleFavourite={(_id, favourite)=> this.handleFavourite(_id, favourite)} />
                 </Route>    
                 <Route path="*">
                     <Redirect to={`/${galleryItems[0] ? galleryItems[0]._id : ''}`} />
@@ -49,7 +55,7 @@ class GalleryPage extends React.Component {
 
 function ImageGalleryWithParams({ galleryItems, handleChangeImage, handleFavourite }) {
     const { id } = useParams();
-    return <ImageGallery galleryItems={galleryItems} selectedId={id} handleChangeImage={handleChangeImage} handleFavourite={handleFavourite} />
+    return <ImageGallery galleryItems={galleryItems} selectedId={id} handleChangeImage={handleChangeImage} handleFavourite={(_id, favourite)=> handleFavourite(_id, favourite)} />
 }
 
 /**
@@ -65,7 +71,8 @@ const mapStateToProps = state => {
  * Give the ToDoManager access to these Redux actions which dispatch API calls
  */
 const mapDispatchToProps = {
-    dispatchListGalleryItems: listGalleryItemsThunk.thunk
+    dispatchListGalleryItems: listGalleryItemsThunk.thunk,
+    dispatchUpdateGalleryItems: updateGalleryItemThunk.thunk,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(GalleryPage));
