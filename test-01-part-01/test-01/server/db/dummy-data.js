@@ -6,13 +6,15 @@ const DUMMY_GALLERY_ITEMS = [
         title: 'Pews',
         created: moment().toDate(),
         imageUrl: '/images/DSC09407.jpg',
-        thumbnailUrl: '/images/thumbnails/DSC09407.jpg'
+        thumbnailUrl: '/images/thumbnails/DSC09407.jpg',
+        favourite: false
     },
     {
         title: 'Church',
         created: moment().subtract(2, 'days').toDate(),
         imageUrl: '/images/DSC09424.jpg',
-        thumbnailUrl: '/images/thumbnails/DSC09424.jpg'
+        thumbnailUrl: '/images/thumbnails/DSC09424.jpg',
+        favourite: true
     },
     {
         title: 'House',

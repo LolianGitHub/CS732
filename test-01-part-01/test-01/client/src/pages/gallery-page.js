@@ -17,20 +17,33 @@ class GalleryPage extends React.Component {
         props.dispatchListGalleryItems();
     }
 
+    handleChangeImage(items) {
+        this.props.history.push(`/${items._id}`);
+    }
+
     render() {
         const { galleryItems } = this.props;
 
         return (
             <Switch>
                 <Route exact path="/">
-                    <ImageGallery> galleryItems={galleryItems} </ImageGallery>
+                    <ImageGallery galleryItems={galleryItems} handleChangeImage={items => this.handleChangeImage(items)} />
                 </Route>
+                <Route path="/:id">
+                    <ImageGalleryWithParams galleryItems={galleryItems} />
+                </Route>    
                 <Route path="*">
                     <Redirect to={`/${galleryItems[0] ? galleryItems[0]._id : ''}`} />
                 </Route>
             </Switch>
         );
     }
+}
+
+
+function ImageGalleryWithParams({ galleryItems }) {
+    const { id } = useParams();
+    return <ImageGallery galleryItems={galleryItems} selectedId={id} />
 }
 
 /**
