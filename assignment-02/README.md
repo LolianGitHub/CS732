@@ -140,7 +140,10 @@ Once you've implemented the functionality for this exercises, if your unit test 
 Finally, in the space below, briefly describe how you have implemented this new functionality. What new React components have you developed, if any? How do they fit into the rest of the app? How does the sorting actually work, based on provided options? Did you need to modify any other code, other than React components? Most importantly, *why* did you choose to do it this way?
 
 ```
-Your answer here.
+After analyse exercise 2,3,4,5, to implete those, I combine exercise 2,3,4,5 as one component(todo-config.js). 
+For the sorting and direction, in order to apply the change the state between todo-config and list, it needs setState in todo-manage(the up level of them) to achieve it. 
+In the meantime to implete the function of sorting, I imported loash lib to sort and direct the value.
+
 ```
 
 
@@ -172,7 +175,10 @@ An example of what groupings might look like can be seen in the following screen
 As with Exercise Two, write a description here of what additions you have made to the app to accomplish this functionality, and why:
 
 ```
-Your answer here.
+As mentioned in execise 2, 
+In order to apply the change the state between todo-config and list, it needs setState in todo-manage(the up level of them) to achieve it. 
+Create a new component (todo-group.js) to store the new grouped result and display
+The logic function impletementation is impletement in todo-list.js
 ```
 
 
